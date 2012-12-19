@@ -5,7 +5,13 @@ widgets = require './controller/widgets'
 
 app = express()
 
-mongoose.connect(process.env.MONGOHQ_URL || "mongodb://localhost/test")
+app.configure ->
+  app.set 'port', process.env.PORT or 4000
+  app.set 'storage', process.env.MONGOHQ_URL or 'mongodb://localhost/widgets'
+  app.use express.bodyParser()
+  app.use express.methodOverride()
+
+mongoose.connect app.get('storage')
 
 require './model/widget'
 
