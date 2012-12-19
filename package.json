@@ -1,0 +1,16 @@
+{
+  "name": "Express-Mongoose-Coffee",
+  "version": "0.0.6",
+  "scripts": {
+      "start": "coffee app.coffee"
+  },
+  "dependencies": {
+    "coffee-script": "latest",
+    "express": "latest",
+    "mongoose": "latest"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
+}
