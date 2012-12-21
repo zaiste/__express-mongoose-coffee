@@ -21,8 +21,11 @@ require './model/widget'
 app.get '/', (req, res) ->
   res.send 'Hello, Zaiste!'
 
-app.get '/widgets', widgets.readMany
-app.post '/widgets', widgets.create
+app.post    '/widgets',       widgets.create
+app.get     '/widgets',       widgets.read
+app.get     '/widgets/:id',   widgets.read
+app.put     '/widgets/:id',   widgets.update
+app.delete  '/widgets/:id',   widgets.delete
 
 app.listen app.get('port'), () ->
   console.log "listening on port #{app.get('port')}"
