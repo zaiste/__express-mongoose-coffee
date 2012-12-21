@@ -1,15 +1,39 @@
 mongoose = require 'mongoose'
 
-exports.readMany = (req, res) ->
-  Widget = mongoose.model('Widget')
+exports.read = (req, res) ->
+  Resource = mongoose.model('Widget')
 
-  Widget.find {}, (err, coll) ->
-    res.send(coll)
+  if req.params.id?
+    Resource.findById req.params.id, (err, resource) ->
+      res.send(500, { error: err }) if err?
+      res.send(resource) if resource?
+      res.send(404)
+  else
+    Resource.find {}, (err, coll) ->
+      res.send(coll)
 
 exports.create = (req, res) ->
-  Widget = mongoose.model("Widget")
-  widget = req.body
+  Resource = mongoose.model("Widget")
+  fields = req.body
 
-  w = new Widget(widget)
-  w.save () ->
-    res.send(w)
+  r = new Resource(fields)
+  r.save (err, resource) ->
+    res.send(500, { error: err }) if err?
+    res.send(resource)
+
+exports.update = (req, res) ->
+  Resource = mongoose.model('Widget')
+  fields = req.body
+
+  Resource.findByIdAndUpdate req.params.id, { $set: fields }, (err, resource) ->
+    res.send(500, { error: err }) if err?
+    res.send(resource) if resource?
+    res.send(404)
+
+exports.delete = (req, res) ->
+  Resource = mongoose.model('Widget')
+
+  Resource.findByIdAndRemove req.params.id, (err, resource) ->
+    res.send(500, { error: err }) if err?
+    res.send(200) if resource?
+    res.send(404)
