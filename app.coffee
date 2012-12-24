@@ -11,7 +11,9 @@ app.configure ->
   app.use express.bodyParser()
   app.use express.methodOverride()
 
-mongoose.connect app.get('storage')
+mongoose.connect app.get('storage'), { db: { safe: true }}, (err) ->
+  console.log "Mongoose - connection error: " + err if err?
+  console.log "Mongoose - connection OK"
 
 require './model/widget'
 
