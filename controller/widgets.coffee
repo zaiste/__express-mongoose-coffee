@@ -1,6 +1,6 @@
 mongoose = require 'mongoose'
 
-exports.read = (req, res) ->
+exports.retrieve = (req, res) ->
   Resource = mongoose.model('Widget')
 
   if req.params.id?
@@ -13,7 +13,7 @@ exports.read = (req, res) ->
       res.send(coll)
 
 exports.create = (req, res) ->
-  Resource = mongoose.model("Widget")
+  Resource = mongoose.model('Widget')
   fields = req.body
 
   r = new Resource(fields)
