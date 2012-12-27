@@ -24,8 +24,8 @@ app.get '/', (req, res) ->
   res.send 'Hello, Zaiste!'
 
 app.post    '/widgets',       widgets.create
-app.get     '/widgets',       widgets.read
-app.get     '/widgets/:id',   widgets.read
+app.get     '/widgets',       widgets.retrieve
+app.get     '/widgets/:id',   widgets.retrieve
 app.put     '/widgets/:id',   widgets.update
 app.delete  '/widgets/:id',   widgets.delete
 
